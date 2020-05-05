@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tutorial/pages/login.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
+
+  @override
+  _SettingsState createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
+  SharedPreferences sharedPreferences;
+
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  _init() async{
+    sharedPreferences = await SharedPreferences.getInstance();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,9 +72,7 @@ class Settings extends StatelessWidget {
             ListTile(
               title: Center(
                 child: GestureDetector(
-                  onTap: (){
-
-                  },
+                  onTap: ()=>_signOut(context),
                   child: new Text(
                     '注销', style: TextStyle(fontWeight: FontWeight.w500,color: Colors.redAccent),),
                 ),
@@ -67,5 +84,11 @@ class Settings extends StatelessWidget {
 
       ),
     );
+  }
+
+  _signOut(context) {
+    sharedPreferences.clear();
+    sharedPreferences.commit();
+    Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (BuildContext context)=>LoginPage()), (route) => false);
   }
 }

@@ -1,7 +1,7 @@
 //
 
 import 'package:flutter/material.dart';
-import 'file:///D:/code/discretemath_tutorial_flutter/lib/pages/aboutme.dart';
+import 'package:tutorial/pages/aboutme.dart';
 import 'package:tutorial/views/problems_view.dart';
 import 'package:tutorial/views/settings.dart';
 
@@ -16,11 +16,16 @@ class _MyPageState extends State<MyPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
-          title: new Text('我'),
+          title: new Text('个人中心'),
+          centerTitle: true,
           actions: <Widget>[
-            new Container(
-
-            )
+            new IconButton(
+                icon: new Icon(
+                  Icons.settings,
+                ),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
+                }),
           ],
         ),
 

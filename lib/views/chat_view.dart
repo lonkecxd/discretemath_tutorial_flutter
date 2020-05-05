@@ -79,8 +79,7 @@ class _ChatViewState extends State<ChatView> {
                   controller: ctl,
                   extraWidget: DefaultExtraWidget(),
                   onSend: (value){
-//                    ctl.clear();
-                    // TODO submit dialogflow
+                    ctl.clear();
                     print("send text $value");
                     _messages.add({'sender':cur_username,'type':'text','content':value.toString()});
                     setState(() {});
@@ -112,13 +111,19 @@ class _ChatViewState extends State<ChatView> {
       );
       AIResponse response = await dialogflow.detectIntent(query);
       String message = response.getMessage()??response.getMessage();
+      String explain = response.queryResult.fulfillmentMessages[1]['text']['text'][0];
+      List<String> suggestions = response.queryResult.fulfillmentMessages[2]['quickReplies']['quickReplies'][0].split(',');
       String intent = response.queryResult.intent.displayName;
       String entity = response.queryResult.parameters['entity'];
       print(message);
       if (intent!=null || entity!=null)
-        _messages.add({'sender':'_notice','type':'text','content':"${intent}   ${entity}"});
+        _messages.add({'sender':'_notice','type':'text','content':"您想要：${intent}（${entity}）"});
       if (message!=null)
-        _messages.add({'sender':'robot','type':'text','content':message==null?"":message});
+        _messages.add({'sender':'robot','type':'text','content':message});
+      if (explain!=null)
+        _messages.add({'sender':'robot','type':'text','content':explain});
+      if (suggestions!=null)
+        _messages.add({'sender':'_notice','type':'text','content':"相关概念：${suggestions}"});
       setState(() {});
   }
 

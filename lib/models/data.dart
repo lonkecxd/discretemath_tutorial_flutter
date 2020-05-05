@@ -101,30 +101,40 @@ class DummyDataService {
   return problems;
   }
 
-  static Future<List<Map<String, dynamic>>> getWrongProblems() async{
+  static Future<List> getWrongProblems() async{
     String userid = await getUid();
+    print(userid);
     String mytoken = await getToken();
+    print(mytoken);
     http.Response response = await http.get(
-        Uri.encodeFull(host+'/graph/find/'+userid+'/DidWrong'),
+        Uri.encodeFull(host+'graph/find/'+userid+'/DidWrong'),
         headers: {
           "Accept": "application/json",
           "Authorization": "Bearer "+mytoken
         }
     );
-    List data = json.decode(response.body).data;
+    print(response.body);
+    List data = json.decode(response.body)['data'];
     return data;
   }
 
   static Future<Problem> getProblemById(String pid) async{
-    String mytoken = await getToken();
-    http.Response response = await http.get(
-        Uri.encodeFull(host+'problems/'+pid),
-        headers: {
-          "Accept": "application/json",
-          "Authorization": "Bearer "+mytoken
-        }
-    );
-    Problem problem = Problem(json.decode(response.body));
+    Problem problem;
+    if (curProblemId!=pid){
+      String mytoken = await getToken();
+      http.Response response = await http.get(
+          Uri.encodeFull(host+'problems/'+pid),
+          headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer "+mytoken
+          }
+      );
+      problem = Problem(json.decode(response.body));
+      curProblem = problem;
+      curProblemId = pid;
+    }else{
+      problem = curProblem;
+    }
     return problem;
   }
 

@@ -1,27 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:tutorial/models/data.dart';
 import 'package:tutorial/views/settings.dart';
 
-class AboutMe extends StatelessWidget {
+class AboutMe extends StatefulWidget {
+  @override
+  _AboutMeState createState() => _AboutMeState();
+}
+
+class _AboutMeState extends State<AboutMe> {
+
+  static String username;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  _getData() async{
+    username = await DummyDataService.getUid();
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        leading: new Icon(
-          Icons.dehaze,
-        ),
-        title: new Text('个人中心'),
-        centerTitle: true,
-        actions: <Widget>[
-          new IconButton(
-              icon: new Icon(
-                Icons.settings,
-              ),
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings()));
-              }),
-        ],
-      ),
-      body: Column(
+    return Column(
         children: <Widget>[
           stack,
           new ListTile(
@@ -59,7 +63,6 @@ class AboutMe extends StatelessWidget {
           )
         ],
         crossAxisAlignment: CrossAxisAlignment.start,
-      )
     );
   }
 
@@ -73,14 +76,15 @@ class AboutMe extends StatelessWidget {
       ),
       CircleAvatar(
         radius: 60,
+        backgroundColor: Colors.white,
         backgroundImage: AssetImage(
-            'assets/emoji.png'
+            'assets/logo.png'
         ),
       ),
       Positioned(
         bottom: 20,
         child: Text(
-            '昵称',
+            '昵称 ',
             style: TextStyle(
               fontSize: 20,
               color: Colors.amberAccent
@@ -89,6 +93,4 @@ class AboutMe extends StatelessWidget {
       )
     ],
   );
-
-
 }
