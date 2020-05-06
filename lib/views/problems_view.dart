@@ -37,7 +37,9 @@ class _ProblemsViewState extends State<ProblemsView> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar:AppBar(
-            title:Text("我的题库")
+            title:Center(child: Text("我的题库")
+            ),
+          elevation: 0,
         ),
         //加入可滚动组件
         body:SingleChildScrollView(

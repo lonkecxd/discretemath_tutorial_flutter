@@ -46,20 +46,20 @@ class HomeBuilder {
       new ClipRect(
         child: new ListTile(
           leading: new CircleAvatar(child: new Text("A")),
-          title: new Text('Drawer item A'),
-          subtitle: new Text("还能写点啥"),
+          title: new Text('个人资料'),
+          subtitle: new Text("查看"),
           onTap: () => {},
         ),
       ),
       new ListTile(
         leading: new CircleAvatar(child: new Text("B")),
-        title: new Text('Drawer item B'),
-        subtitle: new Text("就这？"),
+        title: new Text('学习报告'),
+        subtitle: new Text("自动生成"),
         onTap: () => {},
       ),
       new AboutListTile(
         icon: new CircleAvatar(child: new Text("Ab")),
-        child: new Text("About"),
+        child: new Text("聊天记录"),
         applicationName: "Test",
         applicationVersion: "1.0",
         applicationIcon: new Image.asset(
@@ -80,18 +80,20 @@ class HomeBuilder {
     return new UserAccountsDrawerHeader(
 //      margin: EdgeInsets.zero,
       accountName: new Text(
-        "我就是试一下",
+        "华师学子",
       ),
       accountEmail: new Text(
-        "xxx@163.com",
+        "feelingcxd@126.com",
       ),
       currentAccountPicture: new CircleAvatar(
-        backgroundImage: new AssetImage(""), //头像
+        backgroundImage: new AssetImage("assets/logo.png"), //头像
+        backgroundColor: Colors.white,
       ),
       onDetailsPressed: () {}, //展示更多
       otherAccountsPictures: <Widget>[
         new CircleAvatar(
-          backgroundImage: new AssetImage(""),
+          backgroundImage: new AssetImage("assets/emoji.png"),
+          backgroundColor: Colors.white,
         ),
       ],
     );

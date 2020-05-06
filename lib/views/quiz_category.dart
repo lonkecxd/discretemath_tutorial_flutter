@@ -22,7 +22,7 @@ class _QuizCategoryState extends State<QuizCategory> {
 
   Material MyItems(IconData icon, String heading){
     return Material(
-      color: Theme.of(context).cardColor,
+      color: Theme.of(context).cardColor.withAlpha(220),
       elevation: 2.0,
       shadowColor: Color(0x802196F3),
       borderRadius: BorderRadius.circular(24.0),
@@ -63,27 +63,42 @@ class _QuizCategoryState extends State<QuizCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredGridView.count(
-      crossAxisCount: 2,
-      crossAxisSpacing: 12.0,
-      mainAxisSpacing: 12.0,
-      padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 8.0),
-      children: [
-        MyItems(null,  "第一章 数理逻辑"),
-        MyItems(Icons.graphic_eq ,"第二章 集合论"),
-        MyItems(Icons.graphic_eq ,"第三章 代数结构"),
-        MyItems(Icons.graphic_eq ,"第四章 组合数学"),
-        MyItems(Icons.graphic_eq ,"第五章 图论"),
-        MyItems(Icons.graphic_eq ,"第六章 初等数论"),
-      ],
-      staggeredTiles: [
-        StaggeredTile.extent(1, 90),
-        StaggeredTile.extent(1, 180),
-        StaggeredTile.extent(1, 180),
-        StaggeredTile.extent(1, 180),
-        StaggeredTile.extent(1, 180),
-        StaggeredTile.extent(1, 180),
-      ],
+    return Container(
+      color: Theme.of(context).primaryColor,
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 241, 241, 241),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.0),
+              topRight: Radius.circular(30.0),
+            )
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(top:13.0),
+          child: StaggeredGridView.count(
+            crossAxisCount: 2,
+            crossAxisSpacing: 12.0,
+            mainAxisSpacing: 12.0,
+            padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 8.0),
+            children: [
+              MyItems(null,  "第一章 数理逻辑"),
+              MyItems(Icons.graphic_eq ,"第二章 集合论"),
+              MyItems(Icons.graphic_eq ,"第三章 代数结构"),
+              MyItems(Icons.graphic_eq ,"第四章 组合数学"),
+              MyItems(Icons.graphic_eq ,"第五章 图论"),
+              MyItems(Icons.graphic_eq ,"第六章 初等数论"),
+            ],
+            staggeredTiles: [
+              StaggeredTile.extent(1, 90),
+              StaggeredTile.extent(1, 180),
+              StaggeredTile.extent(1, 180),
+              StaggeredTile.extent(1, 180),
+              StaggeredTile.extent(1, 180),
+              StaggeredTile.extent(1, 180),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

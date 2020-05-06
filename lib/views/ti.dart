@@ -39,8 +39,10 @@ class _CuoTiState extends State<CuoTi> {
         //ListTile()组件，创建列表中的元素
         return ListTile(
           contentPadding: EdgeInsets.all(10.0),
-          title: Text('题目编号：'+_wrongProblems[index]['P']['properties']['pid'],
-          style: TextStyle(fontSize: 20.0),),
+          title: Center(
+            child: Text('题目编号：'+_wrongProblems[index]['P']['properties']['pid'],
+            style: TextStyle(fontSize: 20.0),),
+          ),
           // onTap: (){}, 点击事件，参数为匿名函数，类似于RaisedButton onPressed
           onTap: (){
             Navigator.push(context, MaterialPageRoute(

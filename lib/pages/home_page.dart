@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial/models/order_list_row.dart';
+import 'package:tutorial/views/recommend.dart';
+import 'package:tutorial/views/video_resource.dart';
 //import 'package:fluttertest2/RgbaColor.dart';
 
 //class HomePage extends StatefulWidget{
@@ -66,14 +68,14 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     return new Scaffold(
       appBar: new  PreferredSize(
           child: new AppBar(
+            elevation: 0,
             backgroundColor: Theme.of(context).primaryColor,
-            title: new TabBar(
+            title: TabBar(
               controller: _tabController,
               isScrollable: false,
               indicatorSize: TabBarIndicatorSize.label,
               indicatorColor: Theme.of(context).indicatorColor,
-              labelStyle: TextStyle(fontSize: 15,),
-
+              labelStyle: TextStyle(fontSize: 19,),
               tabs: <Tab>[
                 new Tab(text: "个性推荐",),
                 new Tab(text: "课程",)
@@ -82,68 +84,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               ),
 
           ),
-          preferredSize: Size.fromHeight(40)),
+          preferredSize: Size.fromHeight(50)),
 
       body: getTabBarView(
           <Widget>[
-            ListView(
-              children: <Widget>[
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '集合论',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '命题逻辑',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '一阶逻辑',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '图论',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '形式语言与自动机',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '关系',
-                ),
-              ],
-            ),
-
-            ListView(
-              children: <Widget>[
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '图论',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '形式语言与自动机',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '关系',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '集合论',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '命题逻辑',
-                ),
-                OrderListRow(1,
-                  lessonNum: '23847563928174',
-                  lessonName: '一阶逻辑',
-                ),
-              ],
-            ),
-
+            RecommendView(),
+            VideoRecommend()
         ]
       ),
     );

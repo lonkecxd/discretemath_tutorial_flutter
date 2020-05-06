@@ -57,7 +57,7 @@ class _StudyPageState extends State<StudyPage> with SingleTickerProviderStateMix
               isScrollable: false,
               indicatorSize: TabBarIndicatorSize.label,
               indicatorColor:  Theme.of(context).indicatorColor,
-              labelStyle: TextStyle(fontSize: 15,),
+              labelStyle: TextStyle(fontSize: 19,),
 
               tabs: <Tab>[
                 new Tab(text: "我的题库",),
@@ -68,7 +68,7 @@ class _StudyPageState extends State<StudyPage> with SingleTickerProviderStateMix
             ),
 
           ),
-          preferredSize: Size.fromHeight(40)),
+          preferredSize: Size.fromHeight(50)),
 
       body: getTabBarView(
           <Widget>[

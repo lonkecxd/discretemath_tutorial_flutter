@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tutorial/models/data.dart';
+import 'package:tutorial/tools/theme.dart';
 import 'package:tutorial/views/settings.dart';
 
 class AboutMe extends StatefulWidget {
@@ -25,44 +26,46 @@ class _AboutMeState extends State<AboutMe> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: <Widget>[
-          stack,
-          new ListTile(
-            leading:new Icon(
-              Icons.timeline,
-              color: Colors.blue,
-            ),
-            title:new Text('学习时长：20h',
-              style: TextStyle(
-                fontSize: 18,
+    return SingleChildScrollView(
+      child: Column(
+          children: <Widget>[
+            stack,
+            new ListTile(
+              leading:new Icon(
+                Icons.timeline,
+                color: Colors.blue,
+              ),
+              title:new Text('学习时长：20h',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
-          new ListTile(
-            leading:new Icon(
-              Icons.question_answer,
-              color: Colors.blue,
-            ),
-            title:new Text('累计答题：520题',
-              style: TextStyle(
-                fontSize: 18,
+            new ListTile(
+              leading:new Icon(
+                Icons.question_answer,
+                color: Colors.blue,
+              ),
+              title:new Text('累计答题：520题',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
               ),
             ),
-          ),
-          new ListTile(
-            leading:new Icon(
-              Icons.book,
-              color: Colors.blue,
-            ),
-            title:new Text('掌握知识点：100个',
-              style: TextStyle(
-                fontSize: 18,
+            new ListTile(
+              leading:new Icon(
+                Icons.book,
+                color: Colors.blue,
               ),
-            ),
-          )
-        ],
-        crossAxisAlignment: CrossAxisAlignment.start,
+              title:new Text('掌握知识点：100个',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+            )
+          ],
+          crossAxisAlignment: CrossAxisAlignment.start,
+      ),
     );
   }
 
@@ -84,10 +87,10 @@ class _AboutMeState extends State<AboutMe> {
       Positioned(
         bottom: 20,
         child: Text(
-            '昵称 ',
+            '华师学子',
             style: TextStyle(
               fontSize: 20,
-              color: Colors.amberAccent
+              color: Colors.white
             ),
         ),
       )

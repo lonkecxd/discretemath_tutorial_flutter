@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tutorial/tools/RgbaColor.dart';
+import 'package:tutorial/tools/theme.dart';
 
 class OrderListRow extends StatelessWidget {
   final int lessonStatus;
@@ -19,7 +20,7 @@ class OrderListRow extends StatelessWidget {
   /// 文字状态
   Widget textStatus() {
     var text = '';
-    var color =  Color.fromARGB(255, 22, 209, 233);
+    var color =  MyColors.blueTitle;
     if(lessonStatus == 1) {
       color = rgba(136, 175, 213, 1);
       text = "去学习";
@@ -66,66 +67,65 @@ class OrderListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      borderRadius: BorderRadius.circular(14.0),
+    return Padding(
+      padding: const EdgeInsets.only(
+          left:30.0,right: 30.0,top: 30.0),
       child: InkWell(
-        onTap: () => onPress == null ? (){} : onPress(),
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            height: 160,
-            color: Theme.of(context).cardColor.withOpacity(0.2),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(14.0),
-              child: Column(children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                    //border: G.borderBottom()
+        onTap: (){},
+        child: Container(
+          height: 160,
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 19.0),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Color.fromARGB(255, 249, 249, 249),
+          ),
+          child: Column(
+            children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(bottom: 10),
+              decoration: BoxDecoration(
+                //border: G.borderBottom()
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text('课程编号：$lessonNum', style: TextStyle(
+                      color:MyColors.greenTitle.withBlue(100).withAlpha(200),
+                      fontSize: 14
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('课程编号：$lessonNum', style: TextStyle(
-                          color:Color.fromARGB(255, 22, 209, 233),
-                          fontSize: 12
-                      ),
-                      ),
-                      textStatus()
-                    ],
                   ),
-                ),
-
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('$lessonName', style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold
-                      )
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text('课程简介:........',style: TextStyle(
-                          fontSize: 15,
-                          color:Color.fromARGB(255, 22, 209, 233)
-                      ),)
-                    ],
-                  ),
-                ),
-              ],
+                  textStatus()
+                ],
               ),
             ),
+
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text('$lessonName', style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    color: MyColors.greenTitle
+                  )
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text('课程简介:........',style: TextStyle(
+                      fontSize: 15,
+                      color:MyColors.goodGray
+                  ),)
+                ],
+              ),
+            ),
+          ],
           ),
         ),
       ),
