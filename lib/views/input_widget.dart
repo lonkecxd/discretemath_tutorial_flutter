@@ -73,7 +73,6 @@ class InputWidgetState extends State<InputWidget>
     final keyHeight = mediaQueryData?.viewInsets?.bottom;
     if (keyHeight != 0) {
       _softKeyHeight = keyHeight;
-      print("current type = $currentType");
       // updateState(ChatType.text);
     } else {
       // setState(() {});
@@ -81,7 +80,6 @@ class InputWidgetState extends State<InputWidget>
   }
 
   void onFocus() {
-    print("onFocuse");
     if (focusNode.hasFocus) {
       updateState(ChatType.text);
     }

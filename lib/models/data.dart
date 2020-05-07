@@ -86,19 +86,36 @@ class DummyDataService {
     return token;
   }
 
-  static Future<List<Problem>> getProblemListByChapter(String chapter) async{
-    String mytoken = await getToken();
-  http.Response response = await http.get(
-    Uri.encodeFull(host+'problems?chapter=set_theory'),
-    headers: {
-      "Accept": "application/json",
-      "Authorization": "Bearer "+mytoken
+  static Future<List<Problem>> getProblemListByChapter(String chapterId) async{
+    if (tempProblems==null){
+      String mytoken = await getToken();
+      http.Response response = await http.get(
+          Uri.encodeFull(host+'problems?chapterId='+chapterId),
+          headers: {
+            "Accept": "application/json",
+            "Authorization": "Bearer "+mytoken
+          }
+      );
+      List data = json.decode(response.body);
+      List<Problem> problems = data.map((e) => Problem(e)).toList();
+      tempProblems  = problems;
+      curProblem = problems[0];
+      curProblemId = problems[0].id;
     }
-  );
-  List data = json.decode(response.body);
-  List<Problem> problems = data.map((e) => Problem(e)).toList();
-  tempProblems  = problems;
-  return problems;
+    return tempProblems;
+  }
+
+  static Future<List<Map<String, dynamic>>> getCategories() async{
+    String mytoken = await getToken();
+    http.Response response = await http.get(
+        Uri.encodeFull(host+'chapters'),
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer "+mytoken
+        }
+    );
+    List<Map<String, dynamic>> data = json.decode(response.body);
+    return data;
   }
 
   static Future<List> getWrongProblems() async{
@@ -119,19 +136,40 @@ class DummyDataService {
   }
 
   static Future<Problem> getProblemById(String pid) async{
+    if (pid==null)
+      return null;
     Problem problem;
     if (curProblemId!=pid){
-      String mytoken = await getToken();
-      http.Response response = await http.get(
-          Uri.encodeFull(host+'problems/'+pid),
-          headers: {
-            "Accept": "application/json",
-            "Authorization": "Bearer "+mytoken
-          }
-      );
-      problem = Problem(json.decode(response.body));
-      curProblem = problem;
-      curProblemId = pid;
+      if (tempProblems!=null){
+        List re = tempProblems.where((p) => p.id.contains(pid)).toList();
+        if (re.length>0){
+          problem = re[0];
+        }else{
+          String mytoken = await getToken();
+          http.Response response = await http.get(
+              Uri.encodeFull(host+'problems/'+pid),
+              headers: {
+                "Accept": "application/json",
+                "Authorization": "Bearer "+mytoken
+              }
+          );
+          problem = Problem(json.decode(response.body));
+          curProblem = problem;
+          curProblemId = pid;
+        }
+      }else{
+        String mytoken = await getToken();
+        http.Response response = await http.get(
+            Uri.encodeFull(host+'problems/'+pid),
+            headers: {
+              "Accept": "application/json",
+              "Authorization": "Bearer "+mytoken
+            }
+        );
+        problem = Problem(json.decode(response.body));
+        curProblem = problem;
+        curProblemId = pid;
+      }
     }else{
       problem = curProblem;
     }

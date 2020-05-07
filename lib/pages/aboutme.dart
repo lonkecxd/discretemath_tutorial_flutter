@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tutorial/models/data.dart';
 import 'package:tutorial/tools/theme.dart';
@@ -69,31 +70,43 @@ class _AboutMeState extends State<AboutMe> {
     );
   }
 
-  Widget stack = new Stack(
-    alignment: AlignmentDirectional.center,
-    children: <Widget>[
-      Image.asset(
-        'assets/bg.jpeg',
-        height: 240.0,
-        fit: BoxFit.cover,
-      ),
-      CircleAvatar(
-        radius: 60,
-        backgroundColor: Colors.white,
-        backgroundImage: AssetImage(
-            'assets/logo.png'
+  Widget stack = Container(
+    color: Color(0xff0da56d),
+    child: Container(
+      decoration: BoxDecoration(
+
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0)
         ),
       ),
-      Positioned(
-        bottom: 20,
-        child: Text(
-            '华师学子',
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Image.asset(
+            'assets/bg.jpeg',
+            height: 240.0,
+            fit: BoxFit.cover,
+          ),
+          CircleAvatar(
+            radius: 60,
+            backgroundColor: Colors.white,
+            backgroundImage: AssetImage(
+                'assets/logo.png'
             ),
-        ),
-      )
-    ],
+          ),
+          Positioned(
+            bottom: 20,
+            child: Text(
+              '华师学子',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white
+              ),
+            ),
+          )
+        ],
+      ),
+    ),
   );
 }

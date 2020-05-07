@@ -19,7 +19,7 @@ class _QuizProblemCQState extends State<QuizProblemCQ> {
 
 
   initState() {
-    _getData();
+      _getData();
   }
 
   Future _getData() async{

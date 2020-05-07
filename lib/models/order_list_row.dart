@@ -7,12 +7,14 @@ class OrderListRow extends StatelessWidget {
   final int lessonStatus;
   final String lessonName;///课程名称
   final String lessonNum;///课程编号
+  final String lessonContent;///课程内容
   final Function onPress;
 
 
   OrderListRow(this.lessonStatus, {
     this.lessonName,
     this.lessonNum,
+    this.lessonContent,
     this.onPress
   });
 
@@ -78,6 +80,13 @@ class OrderListRow extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: Color.fromARGB(255, 249, 249, 249),
+            boxShadow: [
+              BoxShadow(
+                color:Colors.black12,
+                blurRadius: 10.0,
+                offset: Offset(10,10)
+              )
+            ]
           ),
           child: Column(
             children: <Widget>[
@@ -115,14 +124,13 @@ class OrderListRow extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text('课程简介:........',style: TextStyle(
-                      fontSize: 15,
-                      color:MyColors.goodGray
-                  ),)
-                ],
+              child: SingleChildScrollView(
+                child: Text(lessonContent,style: TextStyle(
+                          fontSize: 15,
+                          color:MyColors.goodGray
+                      ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,),
               ),
             ),
           ],

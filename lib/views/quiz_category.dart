@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:http/http.dart';
+import 'package:tutorial/models/data.dart';
+import 'package:tutorial/tools/theme.dart';
 import 'package:tutorial/views/quiz_view.dart';
 
 const cardTextColor =  Color.fromARGB(255, 22, 209, 233);
@@ -12,22 +15,61 @@ class QuizCategory extends StatefulWidget {
 
 class _QuizCategoryState extends State<QuizCategory> {
 
-  _onMyItemPressed(heading){
+  List<Map<String, dynamic>> _categories;
+
+  initState(){
+    _getData();
+  }
+
+  Future _getData() async{
+//    _categories = await DummyDataService.getCategories();
+    setState(() {
+      _categories = [
+        {
+          "id": "1",
+          "text": "第一章 数理逻辑"
+        },
+        {
+          "id": "2",
+          "text": "第二章 集合论"
+        },
+        {
+          "id": "3",
+          "text": "第三章 代数结构"
+        },
+        {
+          "id": "4",
+          "text": "第四章 组合数学"
+        },
+        {
+          "id": "5",
+          "text": "第五章 图论"
+        },
+        {
+          "id": "6",
+          "text": "第六章 初等数论"
+        }
+      ];
+    });
+  }
+
+  _onMyItemPressed(id, text){
     Navigator.push(context,new  MaterialPageRoute(
         builder:(context) =>new QuizView(
-              heading: heading,
+              chapterId: id,
+              chapterText: text
         ))
     );
   }
 
-  Material MyItems(IconData icon, String heading){
+  Material MyItems(IconData icon, String heading, String id){
     return Material(
       color: Theme.of(context).cardColor.withAlpha(220),
       elevation: 2.0,
       shadowColor: Color(0x802196F3),
       borderRadius: BorderRadius.circular(24.0),
       child: InkWell(
-        onTap: ()=>_onMyItemPressed(heading),
+        onTap: ()=>_onMyItemPressed(id, heading),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -38,7 +80,7 @@ class _QuizCategoryState extends State<QuizCategory> {
                   //Icon
                   icon != null ? Material(
                     borderRadius: BorderRadius.circular(24.0),
-                    color:  Color(0xff445f7b),
+                    color:  MyColors.blueTitle,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Icon(
@@ -75,27 +117,21 @@ class _QuizCategoryState extends State<QuizCategory> {
         ),
         child: Padding(
           padding: const EdgeInsets.only(top:13.0),
-          child: StaggeredGridView.count(
+          child: _categories==null?
+              CupertinoActivityIndicator(
+                radius: 15.0,
+              ):
+          StaggeredGridView.count(
             crossAxisCount: 2,
             crossAxisSpacing: 12.0,
             mainAxisSpacing: 12.0,
             padding: EdgeInsets.symmetric(horizontal: 16.0,vertical: 8.0),
-            children: [
-              MyItems(null,  "第一章 数理逻辑"),
-              MyItems(Icons.graphic_eq ,"第二章 集合论"),
-              MyItems(Icons.graphic_eq ,"第三章 代数结构"),
-              MyItems(Icons.graphic_eq ,"第四章 组合数学"),
-              MyItems(Icons.graphic_eq ,"第五章 图论"),
-              MyItems(Icons.graphic_eq ,"第六章 初等数论"),
-            ],
-            staggeredTiles: [
-              StaggeredTile.extent(1, 90),
-              StaggeredTile.extent(1, 180),
-              StaggeredTile.extent(1, 180),
-              StaggeredTile.extent(1, 180),
-              StaggeredTile.extent(1, 180),
-              StaggeredTile.extent(1, 180),
-            ],
+            children: _categories.map((e) =>
+              (_categories.indexOf(e)==0)? MyItems(null ,e['text'],e['id'])
+                  :MyItems(Icons.graphic_eq ,e['text'],e['id'])).toList(),
+            staggeredTiles:_categories.map((e) =>
+            (_categories.indexOf(e)==0)? StaggeredTile.extent(1, 90)
+                :StaggeredTile.extent(1, 180)).toList(),
           ),
         ),
       ),

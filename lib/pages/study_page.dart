@@ -52,6 +52,7 @@ class _StudyPageState extends State<StudyPage> with SingleTickerProviderStateMix
       appBar: new  PreferredSize(
           child: new AppBar(
             backgroundColor: Theme.of(context).primaryColor,
+            elevation: 0,
             title: new TabBar(
               controller: _tabController,
               isScrollable: false,

@@ -37,34 +37,39 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: _isLoading?Center(
-          child: CupertinoActivityIndicator(
-            radius: 18.0,
-          ),
-        ):Form(
-            key: _formKey,
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 22.0),
-              children: <Widget>[
-                SizedBox(
-                  height: kToolbarHeight,
-                ),
-                BuildTitle(),
-                BuildTitleLine(),
-                SizedBox(height: 70.0),
-                BuildEmailTextField(),
-                SizedBox(height: 30.0),
-                buildPasswordTextField(context),
-                buildForgetPasswordText(context),
-                SizedBox(height: 60.0),
-                buildLoginButton(context),
-                SizedBox(height: 30.0),
-                buildOtherLoginText(),
+    return MaterialApp(
+      theme: ThemeData.light(),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+//        backgroundColor: Colors.white,
+          body: _isLoading?Center(
+            child: CupertinoActivityIndicator(
+              radius: 18.0,
+            ),
+          ):Form(
+              key: _formKey,
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 22.0),
+                children: <Widget>[
+                  SizedBox(
+                    height: kToolbarHeight,
+                  ),
+                  BuildTitle(),
+                  BuildTitleLine(),
+                  SizedBox(height: 70.0),
+                  BuildEmailTextField(),
+                  SizedBox(height: 30.0),
+                  buildPasswordTextField(context),
+                  buildForgetPasswordText(context),
+                  SizedBox(height: 60.0),
+                  buildLoginButton(context),
+                  SizedBox(height: 30.0),
+                  buildOtherLoginText(),
 
-                buildRegisterText(context),
-              ],
-            )));
+                  buildRegisterText(context),
+                ],
+              ))),
+    );
   }
 
   Align buildRegisterText(BuildContext context) {

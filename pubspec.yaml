@@ -29,7 +29,7 @@ dependencies:
   flutter_dialogflow: ^0.1.2
   shared_preferences: ^0.5.7
   cupertino_icons: ^0.1.3
-  video_player: ^0.10.1+3
+  video_player: ^0.10.9+2
   seekbar: ^0.0.2
 
 dev_dependencies:

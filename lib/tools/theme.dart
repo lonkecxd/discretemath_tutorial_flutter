@@ -12,10 +12,10 @@ ThemeData basicTheme() {
             color: Color.fromARGB(255, 22, 209, 233)
         ),
       bodyText1: base.bodyText1.copyWith(
-        fontSize: 20.0
+        fontSize: 23.0
       ),
       bodyText2: base.bodyText2.copyWith(
-          fontSize: 18.0
+          fontSize: 20.0
       ),
     );
   }

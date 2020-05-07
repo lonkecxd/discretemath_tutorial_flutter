@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
+import 'package:tutorial/models/data.dart';
 import 'package:tutorial/views/chat_view.dart';
 
 const double _kFlingVelocity = 2.0; //动画速度
@@ -112,9 +113,27 @@ class _BackdropState extends State<Backdrop>
           onTap: _toggleBackdropLayerVisibility,
           child: Container(
             width: 260,
-              child: Center(child: Text(widget.title+'所有题目')))
+              child: Center(child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: 30,),
+                  Text(widget.title),
+                  SizedBox(width: 10,),
+                  Icon(Icons.arrow_drop_down,size: 50.0,)
+                ],
+              )))
       ),
       elevation: 0,
+      automaticallyImplyLeading: false,
+      leading: GestureDetector(
+        onTap: (){
+          Navigator.of(context).pop();
+          DummyDataService.tempProblems = null;
+        },
+        child: Icon(Icons.arrow_back_ios,
+        ),
+      ),
     );
 
     bool _show = false;
